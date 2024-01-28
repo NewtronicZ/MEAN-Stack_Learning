@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="float-end mt-2">
+        <a [routerLink]="['create']" class="btn btn-outline-success">
+            เพิ่มข้อมูลลูกค้า
+        </a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>รหัสลูกค้า</th>
+                <th>ชื่อ-สกุล</th>
+                <th>ที่อยู่</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="customers">
+            <tr *ngFor="let c of customers">
+                <td>{{ c.CustomerId }}</td>
+                <td>{{ c.FullName }}</td>
+                <td>{{ c.Address }}</td>
+                <td>
+                    <a [routerLink]="['update', c._id]" class="btn btn-outline-info me-1" 
+                        data-bs-toggle="modal">
+                        แก้ไข
+                    </a>
+                    <button type="button" class="btn btn-outline-danger" (click)="displayDeleteForm(c._id)"
+                        data-bs-toggle="modal" data-bs-target="#deleteCustomerDlg">
+                        ลบ
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="deleteCustomerDlg" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ลบข้อมูลลูกค้า</h5>
+                <button type="button" class="btn-close" 
+                    data-bs-dismiss="modal" 
+                    aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>คุณต้องการลบข้อมูลลูกค้า ใช่หรือไม่?</p>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-outline-success" 
+                    data-bs-dismiss="modal" value="ยกเลิก" />
+                <button type="submit" class="btn btn-outline-danger" 
+                    data-bs-dismiss="modal" (click)="deleteCustomer()">
+                    ลบข้อมูล
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
